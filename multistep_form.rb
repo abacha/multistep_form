@@ -1,8 +1,9 @@
 module MultistepForm
   StepsNotDefined = Class.new(StandardError)
 
-  def initialize
+  def initialize(*args)
     raise StepsNotDefined unless defined?(steps)
+    super(*args)
   end
 
   def first_step?

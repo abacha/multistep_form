@@ -1,6 +1,5 @@
 require_relative "../multistep_form.rb"
 
-
 class Demo
   include MultistepForm
 
