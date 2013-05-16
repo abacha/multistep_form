@@ -26,10 +26,12 @@ module MultistepForm
   end
 
   def next_step
+    return if block_given? && yield == false
     @current_step = steps[steps.index(current_step)+1]
   end
 
   def previous_step
+    return if block_given? && yield == false
     @current_step = steps[steps.index(current_step)-1]
   end
 end

@@ -45,4 +45,23 @@ describe MultistepForm do
     demo.previous_step
     demo.current_step.should == steps[0]
   end
+
+  it "advance a step if a block is valid" do
+    demo.next_step { demo.first_step? }
+    demo.current_step.should == steps[1]
+    demo.next_step { 1 == 2 }
+    demo.current_step.should == steps[1]
+    demo.next_step { !demo.last_step? }
+    demo.current_step.should == steps[2]
+  end
+
+  it "advance a step if a block is valid" do
+    demo.force_step(index: 2)
+    demo.previous_step { demo.last_step? }
+    demo.current_step.should == steps[1]
+    demo.previous_step { demo.last_step? }
+    demo.current_step.should == steps[1]
+    demo.previous_step { 1 == 1 }
+    demo.current_step.should == steps[0]
+  end
 end
