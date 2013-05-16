@@ -3,6 +3,7 @@ module MultistepForm
 
   def initialize(*args)
     raise StepsNotDefined unless defined?(steps)
+    @current_step = steps.first
     super(*args)
   end
 
