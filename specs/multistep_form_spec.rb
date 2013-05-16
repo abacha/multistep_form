@@ -27,7 +27,7 @@ describe MultistepForm do
   it "test steps" do
     demo.first_step?.should be_true
     demo.last_step?.should be_false
-    demo.force_step(index: 2)
+    demo.force_step(2, true)
     demo.last_step?.should be_true
     demo.force_step(steps[0])
     demo.first_step?.should be_true
@@ -40,7 +40,7 @@ describe MultistepForm do
   end
 
   it "steps down" do
-    demo.force_step(index: 1)
+    demo.force_step(1, true)
     demo.previous_step
     demo.current_step.should == steps[0]
   end
@@ -55,7 +55,7 @@ describe MultistepForm do
   end
 
   it "advance a step if a block is valid" do
-    demo.force_step(index: 2)
+    demo.force_step(2, true)
     demo.previous_step { demo.last_step? }
     demo.current_step.should == steps[1]
     demo.previous_step { demo.last_step? }

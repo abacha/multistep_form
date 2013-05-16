@@ -14,11 +14,11 @@ module MultistepForm
     current_step == steps.last
   end
 
-  def force_step(options)
-    if options.is_a?(Hash)
-      @current_step = steps[options[:index]]
+  def force_step(step, as_index = false)
+    if as_index
+      @current_step = steps[step]
     else
-      @current_step = options
+      @current_step = step
     end
   end
 
@@ -36,6 +36,6 @@ module MultistepForm
 
   def step(index, &block)
     return if block_given? && block.call == false
-    @current_step = steps[steps.index(current_step) + index]
+    force_step(steps.index(current_step) + index, true)
   end
 end
