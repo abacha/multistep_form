@@ -34,4 +34,15 @@ describe MultistepForm do
     demo.first_step?.should be_true
     demo.last_step?.should be_false
   end
+
+  it "steps up" do
+    demo.next_step
+    demo.current_step.should == steps[1]
+  end
+
+  it "steps down" do
+    demo.force_step(index: 1)
+    demo.previous_step
+    demo.current_step.should == steps[0]
+  end
 end
