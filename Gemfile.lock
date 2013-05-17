@@ -1,6 +1,14 @@
+PATH
+  remote: .
+  specs:
+    multistep_form (0.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
+    active_support (3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
     diff-lcs (1.2.4)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
@@ -15,4 +23,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_support
+  multistep_form!
   rspec (~> 2.13.0)
