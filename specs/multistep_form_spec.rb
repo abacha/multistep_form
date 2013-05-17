@@ -1,10 +1,15 @@
-require_relative "../multistep_form.rb"
+require "multistep_form"
 
 class Demo
   include MultistepForm
+  attr_accessor :session
 
   def steps
     %w[step1 step2 step3]
+  end
+
+  def session
+    @session ||= {}
   end
 end
 
@@ -62,5 +67,12 @@ describe MultistepForm do
     demo.current_step.should == steps[1]
     demo.previous_step { 1 == 1 }
     demo.current_step.should == steps[0]
+  end
+
+  it "should record on session" do
+    demo.force_step(1, true)
+    demo.session["demo_current_step"].should == steps[1]
+    demo.force_step(2, true)
+    demo.session["demo_current_step"].should == steps[2]
   end
 end

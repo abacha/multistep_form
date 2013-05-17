@@ -1,9 +1,11 @@
+require "active_support/inflector"
+
 module MultistepForm
+  extend ActiveSupport::Inflector
   StepsNotDefined = Class.new(StandardError)
 
   def initialize(*args)
     raise StepsNotDefined unless defined?(steps)
-    @current_step = steps.first
     super(*args)
   end
 
@@ -21,6 +23,8 @@ module MultistepForm
     else
       @current_step = step
     end
+    @current_step ||= steps.first
+    session["#{self.class.name.underscore}_current_step"] = @current_step
   end
 
   def current_step
